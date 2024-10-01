@@ -2,6 +2,7 @@ package com.example.quizoo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -14,13 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.quizoo.ui.theme.OrangeQ
 import com.example.quizoo.ui.theme.blackq
 
 
-@Preview
 @Composable
-fun Mathematics() {
+fun Mathematics(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -46,6 +47,10 @@ fun Mathematics() {
                         modifier = Modifier
                             .size(48.dp)
                             .padding(8.dp)
+                            .clickable {
+                                navController.popBackStack()
+
+                            }
                     )
                 }
 
