@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -59,6 +61,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.paging.common.android)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +73,33 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //on boarding screens ko lagi dependencies
+    implementation(libs.ui)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.activity.compose.v131)
+    implementation(libs.accompanist.pager)
+
+
+    //splash api
+    implementation(libs.androidx.core.splashscreen)
+
+    //navigation compose ko lagi
+    implementation(libs.androidx.navigation.compose)
+
+    //datastore preferences
+    implementation(libs.androidx.datastore.preferences)
+
+    //Dagger-Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.androidx.hilt.hilt.navigation.compose2)
+
+    //visibility
+    implementation(libs.androidx.ui.v140)
+    implementation(libs.material3)
+    implementation(libs.androidx.material.icons.extended)
+
+
+
 }
