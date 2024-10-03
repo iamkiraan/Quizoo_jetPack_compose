@@ -1,6 +1,6 @@
 package com.example.quizoo.Screens
 
-import android.content.Intent
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
@@ -38,7 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -51,7 +49,10 @@ import com.example.quizoo.ui.theme.blackq
 
 @Composable
 fun Login(navController : NavHostController) {
+    var password by remember { mutableStateOf("") }
+    val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
     val context = LocalContext.current
+
 
     Box(
         modifier = Modifier
@@ -111,13 +112,17 @@ fun Login(navController : NavHostController) {
 
             )
 
-            PasswordTextField()
+            //PasswordTextField()
 
 
 
             Button(
                 onClick = {
-                    navController.navigate(Screens.mathematics.route)
+
+
+                        navController.navigate(route = Screens.Login.route)
+
+
 
                 },
                 modifier = Modifier
@@ -179,7 +184,7 @@ fun Login(navController : NavHostController) {
 
     @Composable
     fun PasswordTextField() {
-        var password by remember { mutableStateOf("") }
+
         var passwordVisible by remember { mutableStateOf(false) }
 
         OutlinedTextField(
