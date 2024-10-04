@@ -4,4 +4,5 @@ package com.example.quizoo.Navigations
      object Login : Screens(route = "Login")
      object Register : Screens(route = "Register")
      object mathematics : Screens(route = "mathematics")
+
  }

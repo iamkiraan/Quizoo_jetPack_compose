@@ -1,4 +1,4 @@
-package com.example.quizoo
+package com.example.quizoo.MainPart
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,12 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quizoo.R
 import com.example.quizoo.dataStore.StoreUserDetails
 import com.example.quizoo.ui.theme.OrangeQ
+import com.example.quizoo.ui.theme.SkyBlue
 import com.example.quizoo.ui.theme.blackq
 
 
@@ -32,7 +33,8 @@ fun Mathematics(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(blackq)
+            .fillMaxWidth()
+            .background(Color.White)
     ) {
         Column() {
             Card(
@@ -40,7 +42,7 @@ fun Mathematics(navController: NavController) {
                     .fillMaxWidth()
                     .height(300.dp),
                 shape = RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp),
-                colors = CardDefaults.cardColors(containerColor = OrangeQ)
+                colors = CardDefaults.cardColors(containerColor = SkyBlue)
             ) {
                 Box(
                     modifier = Modifier
@@ -76,33 +78,33 @@ fun Mathematics(navController: NavController) {
             Card(
                 modifier = Modifier
                     .padding(top = 80.dp, start = 40.dp,end =40.dp),
-                colors = CardDefaults.cardColors(containerColor = blackq)
+                colors = CardDefaults.cardColors(containerColor =Color.White)
             ) {
 
                 Column(
                 ) {
                     Text(text = "Chapter Name:",
-                        color =Color.White)
+                        color = blackq)
                     Text(text = "12",
                         color = OrangeQ,
                         modifier = Modifier.padding(top=10.dp)
                     )
                     Text(text = "Topic Name:",
-                        color =Color.White,
+                        color = blackq,
                         modifier = Modifier.padding(top = 20.dp))
                     Text(text = "Pair of Linear Equation in two variables",
                         color = OrangeQ,
                         modifier = Modifier.padding(top=10.dp)
                     )
                     Text(text = "Number of Questions:",
-                        color =Color.White,
+                        color = blackq,
                         modifier = Modifier.padding(top = 20.dp))
                     Text(text = "06",
                         color = OrangeQ,
                         modifier = Modifier.padding(top=10.dp)
                     )
                     Text(text = "Total Time:",
-                        color =Color.White,
+                        color = blackq,
                         modifier = Modifier.padding(top = 20.dp))
                     Text(text = "15 Min",
                         color = OrangeQ,

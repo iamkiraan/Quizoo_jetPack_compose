@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.quizoo.BottomNavBar.AppNavigation
 import com.example.quizoo.Navigations.SetUpNavigation
 import com.example.quizoo.Screens.SignUpScreen
 
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
 
            navController = rememberNavController()
             SetUpNavigation(navController = navController)
+
         }
     }
 }
