@@ -4,12 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.quizoo.BottomNavBar.AppNavigation
-import com.example.quizoo.Navigations.SetUpNavigation
 import com.example.quizoo.Screens.SignUpScreen
 
 
@@ -22,8 +17,11 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
 
-           navController = rememberNavController()
-            SetUpNavigation(navController = navController)
+//         navController = rememberNavController()
+//
+//        SetUpNavigation(navController = navController)
+            SignUpScreen(navController = navController)
+
 
         }
     }

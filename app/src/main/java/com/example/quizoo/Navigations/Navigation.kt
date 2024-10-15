@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.quizoo.BottomNavBar.AppNavigation
 import com.example.quizoo.MainPart.Mathematics
+import com.example.quizoo.MainPart.MathematicsQuiz
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
 
@@ -34,6 +35,11 @@ fun SetUpNavigation(
        ){
            AppNavigation(navController)
        }
+
+       composable(route = Screens.mathematics.route) {
+           Mathematics()
+       }
+
 
    }
 }

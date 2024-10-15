@@ -113,6 +113,12 @@ dependencies {
     //datastore
     implementation(libs.androidx.datastore.preferences)
 
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.converter.gson)
+
+
 
 
 }
