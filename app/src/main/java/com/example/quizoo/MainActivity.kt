@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quizoo.MainPart.Mathematics
 import com.example.quizoo.MainPart.MathematicsQuiz
+import com.example.quizoo.MathematicsScreens.Board
 import com.example.quizoo.MathematicsScreens.StartScreen
 import com.example.quizoo.Navigations.SetUpNavigation
 import com.example.quizoo.Screens.SignUpScreen
@@ -24,7 +25,8 @@ class MainActivity : ComponentActivity() {
 
        navController = rememberNavController()
 
-        SetUpNavigation(navController = navController)
+       // SetUpNavigation(navController = navController)
+            Board()
 
 
 
