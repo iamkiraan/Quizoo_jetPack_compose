@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quizoo.Navigations.Screens
 import com.example.quizoo.R
 import com.example.quizoo.dataStore.StoreUserDetails
@@ -32,7 +34,7 @@ import com.example.quizoo.ui.theme.blackq
 import com.example.quizoo.ui.theme.lightPurple
 
 @Composable
-fun Mathematics() {
+fun Mathematics(navController: NavHostController = rememberNavController()) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val dataStore = StoreUserDetails(context)
@@ -119,8 +121,10 @@ fun Mathematics() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clickable {
-                                    //navController.navigate(Screens.quizMathematics.route)
-                                },
+                                    navController.navigate(route = Screens.MathematicsStart.route)
+
+                                }
+                            ,
                             contentScale = ContentScale.Crop)
 
                     }
@@ -145,7 +149,8 @@ fun Mathematics() {
                             .size(100.dp)
                     ) {
                         Image(painter = painterResource(id = R.drawable.gk), contentDescription = "Mathematics",
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier
+                                .fillMaxSize()
                                 .weight(1f),
                             contentScale = ContentScale.Crop)
 
@@ -170,7 +175,7 @@ fun Mathematics() {
                     }
 
                 }
-                
+
             }
 
 
@@ -180,6 +185,13 @@ fun Mathematics() {
     }
 
     }
+
+
+@Preview()
+@Composable
+fun shwBack(){
+    Mathematics()
+}
 
 
 

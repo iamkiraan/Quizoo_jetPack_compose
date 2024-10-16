@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.quizoo.BottomNavBar.AppNavigation
 import com.example.quizoo.MainPart.Mathematics
 import com.example.quizoo.MainPart.MathematicsQuiz
+import com.example.quizoo.MathematicsScreens.StartScreen
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
 
@@ -16,7 +16,7 @@ fun SetUpNavigation(
 ){
    NavHost(
        navController = navController,
-       startDestination = Screens.Login.route
+       startDestination = Screens.mathematics.route
    ){
        composable(
            route = Screens.Login.route
@@ -30,14 +30,16 @@ fun SetUpNavigation(
            SignUpScreen(navController)
        }
 
-       composable(
-           route = Screens.mathematics.route
-       ){
-           AppNavigation(navController)
-       }
 
        composable(route = Screens.mathematics.route) {
-           Mathematics()
+           Mathematics(navController = navController)
+       }
+       composable(route = Screens.quizMathematics.route ){
+           MathematicsQuiz(navController = navController)
+       }
+
+       composable(route = Screens.MathematicsStart.route ){
+           StartScreen(navController)
        }
 
 
