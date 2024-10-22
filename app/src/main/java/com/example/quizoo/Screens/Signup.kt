@@ -65,8 +65,6 @@ fun SignUpScreen(
     // DataStore
     val dataStore = StoreUserDetails(context)
 
-    // Getting the saved data
-    val saveUsername = dataStore.getUserName.collectAsState(initial = "")
 
     // State variables for form fields
     var fullName by remember { mutableStateOf("") }

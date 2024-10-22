@@ -8,5 +8,6 @@ package com.example.quizoo.Navigations
      object MathematicsStart : Screens(route = "MathematicsStart")
      object TrueFalseBoardMath : Screens(route = "TrueFalseBoard")
      object MultipleBoardMath : Screens(route = "MultipleBoardMath")
+     object ResultMathematics : Screens(route = "resultMathematics?correctCount={correctCount}&incorrectCount={incorrectCount}&skippedCount={skippedCount}")
 
  }

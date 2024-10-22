@@ -4,10 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.quizoo.MainPart.Mathematics
 import com.example.quizoo.MainPart.MathematicsQuiz
 import com.example.quizoo.MathematicsScreens.Board
 import com.example.quizoo.MathematicsScreens.BoardTrue
+import com.example.quizoo.MathematicsScreens.Show
 import com.example.quizoo.MathematicsScreens.StartScreen
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
@@ -53,6 +55,22 @@ fun SetUpNavigation(
        composable(route = Screens.MultipleBoardMath.route ){
            BoardTrue(navController)
        }
+
+       composable(
+           route = Screens.ResultMathematics.route,
+           arguments = listOf(
+               navArgument("correctCount") { defaultValue = 0 },
+               navArgument("incorrectCount") { defaultValue = 0 },
+               navArgument("skippedCount") { defaultValue = 0 }
+           )
+       ) { backStackEntry ->
+           val correctCount = backStackEntry.arguments?.getInt("correctCount") ?: 0
+           val incorrectCount = backStackEntry.arguments?.getInt("incorrectCount") ?: 0
+           val skippedCount = backStackEntry.arguments?.getInt("skippedCount") ?: 0
+
+           Show(navController, correctCount, incorrectCount, skippedCount)
+       }
+
 
 
    }
