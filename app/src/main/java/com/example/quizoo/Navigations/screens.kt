@@ -6,5 +6,7 @@ package com.example.quizoo.Navigations
      object mathematics : Screens(route = "mathematics")
      object quizMathematics : Screens(route = "quizMathematics")
      object MathematicsStart : Screens(route = "MathematicsStart")
+     object TrueFalseBoardMath : Screens(route = "TrueFalseBoard")
+     object MultipleBoardMath : Screens(route = "MultipleBoardMath")
 
  }

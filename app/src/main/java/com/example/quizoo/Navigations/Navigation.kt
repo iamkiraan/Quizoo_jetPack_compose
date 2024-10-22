@@ -6,6 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.quizoo.MainPart.Mathematics
 import com.example.quizoo.MainPart.MathematicsQuiz
+import com.example.quizoo.MathematicsScreens.Board
+import com.example.quizoo.MathematicsScreens.BoardTrue
 import com.example.quizoo.MathematicsScreens.StartScreen
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
@@ -40,6 +42,16 @@ fun SetUpNavigation(
 
        composable(route = Screens.MathematicsStart.route ){
            StartScreen(navController)
+       }
+
+
+       composable(route = Screens.TrueFalseBoardMath.route ){
+           Board(navController)
+       }
+
+
+       composable(route = Screens.MultipleBoardMath.route ){
+           BoardTrue(navController)
        }
 
 
