@@ -2,6 +2,7 @@ package com.example.quizoo.Navigations
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
@@ -59,17 +60,19 @@ fun SetUpNavigation(
        composable(
            route = Screens.ResultMathematics.route,
            arguments = listOf(
-               navArgument("correctCount") { defaultValue = 0 },
-               navArgument("incorrectCount") { defaultValue = 0 },
-               navArgument("skippedCount") { defaultValue = 0 }
+               navArgument("correct"){
+                   type = NavType.IntType
+               }
            )
-       ) { backStackEntry ->
-           val correctCount = backStackEntry.arguments?.getInt("correctCount") ?: 0
-           val incorrectCount = backStackEntry.arguments?.getInt("incorrectCount") ?: 0
-           val skippedCount = backStackEntry.arguments?.getInt("skippedCount") ?: 0
 
-           Show(navController, correctCount, incorrectCount, skippedCount)
+       ){
+               backStackEntry ->
+           val correctAnswers = backStackEntry.arguments?.getInt("correct") ?: 0
+           Show(navController = navController,correctAnswers)
+
+
        }
+
 
 
 
