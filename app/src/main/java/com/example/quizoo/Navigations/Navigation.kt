@@ -57,7 +57,7 @@ fun SetUpNavigation(
        ) {rest->
            val topic =  rest.arguments?.getString("topic")?:""
            val image = rest.arguments?.getInt("image") ?: 0
-           StartScreen(navController,topic = topic,image =image)
+           StartScreen(navController = navController,topic = topic,image =image)
        }
 
 

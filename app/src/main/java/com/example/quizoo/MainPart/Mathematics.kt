@@ -152,12 +152,12 @@ fun Mathematics(
                                 .size(100.dp)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.programming),
+                                painter = painterResource(id = R.drawable.gk),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("Programming",R.drawable.programming))
+                                        navController.navigate(Screens.MathematicsStart.getTopic("Programming",R.drawable.gk))
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -204,12 +204,12 @@ fun Mathematics(
                                 .size(100.dp)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.gk),
+                                painter = painterResource(id = R.drawable.programming),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("General Knowledge",R.drawable.gk))
+                                        navController.navigate(Screens.MathematicsStart.getTopic("General Knowledge",R.drawable.programming))
 
                                     },
                                 contentScale = ContentScale.Crop)
