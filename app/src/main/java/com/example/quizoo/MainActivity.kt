@@ -24,13 +24,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-
-       navController = rememberNavController()
+            navController = rememberNavController()
 
         SetUpNavigation(navController = navController)
-           // MathematicsQuiz(navController = navController)
-           //BoardTrue(navController = navController)
-            //Show(navController = navController)
+           // Show(navController = navController, correct = 3, incorrect = 5, skipped = 5)
+
 
         }
     }

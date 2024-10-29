@@ -120,7 +120,7 @@ fun Login(navController : NavHostController) {
                 onClick = {
 
 
-                        navController.navigate(route = Screens.Login.route)
+                       // navController.navigate(route = Screens.ResultMathematics.PassCorrect(43))
 
 
 

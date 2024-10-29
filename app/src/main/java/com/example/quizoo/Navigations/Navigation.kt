@@ -60,17 +60,15 @@ fun SetUpNavigation(
        composable(
            route = Screens.ResultMathematics.route,
            arguments = listOf(
-               navArgument("correct"){
-                   type = NavType.IntType
-               }
+               navArgument("correct") { type = NavType.IntType },
+               navArgument("incorrect") { type = NavType.IntType },
+               navArgument("skipped") { type = NavType.IntType }
            )
-
-       ){
-               backStackEntry ->
+       ) { backStackEntry ->
            val correctAnswers = backStackEntry.arguments?.getInt("correct") ?: 0
-           Show(navController = navController,correctAnswers)
-
-
+           val incorrectAnswers = backStackEntry.arguments?.getInt("incorrect") ?: 0
+           val skipped = backStackEntry.arguments?.getInt("skipped") ?: 0
+           Show(navController = navController, correct = correctAnswers, incorrect = incorrectAnswers, skipped = skipped)
        }
 
 
