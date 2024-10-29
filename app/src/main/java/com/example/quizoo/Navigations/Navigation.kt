@@ -36,26 +36,30 @@ fun SetUpNavigation(
        }
 
 
-       composable(route = Screens.mathematics.route) {
+       composable(
+           route = Screens.mathematics.route,
+       ){
+
            Mathematics(navController = navController)
        }
        composable(route = Screens.quizMathematics.route ){
            MathematicsQuiz(navController = navController)
        }
 
-       composable(route = Screens.MathematicsStart.route ){
-           StartScreen(navController)
+
+       //startScreen
+       composable(
+           route = Screens.MathematicsStart.route, arguments = listOf(
+               navArgument("topic"){type = NavType.StringType},
+               navArgument("image"){type = NavType.IntType}
+
+           )
+       ) {rest->
+           val topic =  rest.arguments?.getString("topic")?:""
+           val image = rest.arguments?.getInt("image") ?: 0
+           StartScreen(navController,topic = topic,image =image)
        }
 
-
-       composable(route = Screens.TrueFalseBoardMath.route ){
-           Board(navController)
-       }
-
-
-       composable(route = Screens.MultipleBoardMath.route ){
-           BoardTrue(navController)
-       }
 
        composable(
            route = Screens.ResultMathematics.route,
@@ -70,6 +74,32 @@ fun SetUpNavigation(
            val skipped = backStackEntry.arguments?.getInt("skipped") ?: 0
            Show(navController = navController, correct = correctAnswers, incorrect = incorrectAnswers, skipped = skipped)
        }
+
+
+
+
+       composable(route = Screens.TrueFalseBoardMath.route ){
+           Board(navController)
+       }
+
+
+       composable(route = Screens.MultipleBoardMath.route ){
+           BoardTrue(navController)
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
