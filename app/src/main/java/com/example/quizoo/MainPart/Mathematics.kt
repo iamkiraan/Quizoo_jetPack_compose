@@ -15,8 +15,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -33,12 +33,15 @@ import com.example.quizoo.ui.theme.darkTeal
 import com.example.quizoo.ui.theme.lightGray
 import com.example.quizoo.ui.theme.lightPurple
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.Canvas
+
 
 
 @Preview
 @Composable
 fun Mathematics(
     navController: NavHostController = rememberNavController()
+
 
 ) {
 
@@ -49,14 +52,18 @@ fun Mathematics(
     val dataStore = StoreUserDetails(context)
     val scope = rememberCoroutineScope()
     val saveUsername = dataStore.getUserName.collectAsState(initial = "")
-    val correct_answers = dataStore.getCorrrect.collectAsState(initial = 0)
-    val incorrect_answers = dataStore.getIncorrrect.collectAsState(initial = 0)
+    val correct = dataStore.getCorrrect.collectAsState(initial = 0)
+    val incorrect = dataStore.getIncorrrect.collectAsState(initial = 0)
+    val Flag = dataStore.getCount.collectAsState(initial = 0)
+    println("value for data saved : $Flag")
+
+
     val getId = dataStore.getId.collectAsState(initial = 0)
     val image : Int = when(getId.value){
         1-> R.drawable.mathematics
-        2->R.drawable.programming
+        2->R.drawable.gk
         3->R.drawable.science
-        else -> R.drawable.gk
+        else -> R.drawable.programming
     }
     val topic : String = when(getId.value){
         1-> "Mathematics"
@@ -81,7 +88,7 @@ fun Mathematics(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
+                    .height(190.dp)
                     .padding(top = 35.dp, start = 20.dp, end = 20.dp),
                 elevation =CardDefaults.cardElevation(100.dp),
                 shape = RoundedCornerShape(10.dp)
@@ -225,7 +232,7 @@ fun Mathematics(
                                             }
                                             val route = Screens.MathematicsStart.getTopic(
                                                 topic = "Science",
-                                                image = R.drawable.programming,
+                                                image = R.drawable.science,
                                                 id = 3
                                             )
                                             navController.navigate(route)
@@ -286,14 +293,17 @@ fun Mathematics(
                         ){
                         Column(modifier = Modifier.padding(10.dp),
                             ){
-                            Text(text = "Recent Results", fontSize = 20.sp,modifier =Modifier.padding(start =20.dp,top = 20.dp), color = Color.White)
+                            Text(text = "Recent Result", fontSize = 20.sp,modifier =Modifier.padding(start =10.dp,top = 20.dp), color = Color.White)
+
                             Column(modifier = Modifier.verticalScroll(state = verticalScrollState)) {
                                 Datashow(
                                     image = image,
-                                    correct = correct_answers,
-                                    incorrect = incorrect_answers,
+                                    correct = correct,
+                                    incorrect = incorrect,
                                     topic = topic
                                 )
+
+
 
 
                             }
@@ -314,16 +324,17 @@ fun Mathematics(
 
 @Composable
 fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: String){
-    val correctValue = correct.value?:0
-    val incorrectValue = incorrect.value?:0
+    val correctValue = correct.value ?:0
+    val incorrectValue =incorrect.value?:0
+
     val percentage = correctValue*10
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp), colors = CardDefaults.cardColors(darkTeal)){
         Row(){
-            Image(painter = painterResource(id = R.drawable.gk), contentDescription ="",modifier =Modifier.size(60.dp))
+            Image(painter = painterResource(id = image), contentDescription ="",modifier =Modifier.size(60.dp))
             Column(modifier = Modifier.padding(8.dp)) {
-                Text("Mathematics",color = lightGray)
+                Text(topic,color = lightGray)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(.6f)
@@ -331,15 +342,69 @@ fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: Str
                         .height(1.dp)
                         .background(Color.Black)
                 )
-                Text("Correct: $correctValue\t\tIncorrect: $incorrectValue ",color = lightGray,modifier = Modifier.padding(top=3.dp))
+                Text("Correct: $correctValue\t\tIncorrect: $incorrectValue",color = lightGray,modifier = Modifier.padding(top=3.dp))
             }
 
             Text("$percentage %", modifier = Modifier.padding(12.dp),color = if(percentage>=40){Color.Green}else {Color.Red}, fontSize = 24.sp)
         }
+        SimpleBarChart(correct = correctValue, incorrect = incorrectValue)
 
 
 
 
+    }
+}
+
+
+// bar chart dekhaune kaam yeta
+
+@Composable
+fun SimpleBarChart(correct: Int, incorrect: Int) {
+    val total = correct + incorrect
+
+    // Calculate bar heights based on percentages
+    val correctHeight = if (total > 0) (correct / total.toFloat()) * 200 else 0f
+    val incorrectHeight = if (total > 0) (incorrect / total.toFloat()) * 200 else 0f
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        // Correct Answers Bar
+        Column(
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .width(50.dp)
+                    .height(200.dp)
+            ) {
+                drawRect(
+                    color = Color.Green,
+                    size = Size(width = size.width, height = correctHeight)
+                )
+            }
+            Text(text = "Correct", color = Color.White)
+        }
+
+        // Incorrect Answers Bar
+        Column(
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .width(50.dp)
+                    .height(200.dp)
+            ) {
+                drawRect(
+                    color = Color.Red,
+                    size = androidx.compose.ui.geometry.Size(width = size.width, height = incorrectHeight)
+                )
+            }
+            Text(text = "Incorrect", color = Color.White)
+        }
     }
 }
 
