@@ -40,7 +40,7 @@ fun SetUpNavigation(
            route = Screens.mathematics.route,
        ){
 
-           Mathematics(navController = navController)
+           Mathematics()
        }
        composable(route = Screens.quizMathematics.route ){
            MathematicsQuiz(navController = navController)

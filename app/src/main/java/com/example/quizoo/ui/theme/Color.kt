@@ -21,3 +21,6 @@ val DarkPurple =Color(52,23,109)
 val lightPurple = Color(67,106,122)
 val resultColor = Color(0xFFF22283E)
 val boxResult = Color(0xFF6B7586)
+val darkTeal = Color(50, 80, 92)
+val lightGray = Color(230, 230, 230)       // Text color
+val accentColor = Color(144, 190, 183)
