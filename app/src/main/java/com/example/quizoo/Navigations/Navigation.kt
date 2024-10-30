@@ -51,13 +51,15 @@ fun SetUpNavigation(
        composable(
            route = Screens.MathematicsStart.route, arguments = listOf(
                navArgument("topic"){type = NavType.StringType},
-               navArgument("image"){type = NavType.IntType}
+               navArgument("image"){type = NavType.IntType},
+               navArgument("id"){type = NavType.IntType}
 
            )
        ) {rest->
            val topic =  rest.arguments?.getString("topic")?:""
            val image = rest.arguments?.getInt("image") ?: 0
-           StartScreen(navController = navController,topic = topic,image =image)
+           val id = rest.arguments?.getInt("id")?:-1
+           StartScreen(navController = navController,topic = topic,image =image,id = id)
        }
 
 
@@ -78,13 +80,17 @@ fun SetUpNavigation(
 
 
 
-       composable(route = Screens.TrueFalseBoardMath.route ){
-           Board(navController)
-       }
 
 
-       composable(route = Screens.MultipleBoardMath.route ){
-           BoardTrue(navController)
+
+       composable(
+           route = Screens.MultipleBoardMath.route,
+           arguments = listOf(
+               navArgument("id"){type = NavType.IntType}
+           )
+       ){res->
+           val id = res.arguments?.getInt("id")?:0
+           BoardTrue(navController,id = id)
        }
 
 

@@ -1,6 +1,6 @@
 package com.example.quizoo.MainPart
 
-import android.media.Image
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,10 +29,8 @@ import com.example.quizoo.Navigations.Screens
 import com.example.quizoo.R
 import com.example.quizoo.dataStore.StoreUserDetails
 import com.example.quizoo.ui.theme.DarkPurple
-import com.example.quizoo.ui.theme.OrangeQ
-import com.example.quizoo.ui.theme.SkyBlue
-import com.example.quizoo.ui.theme.blackq
 import com.example.quizoo.ui.theme.lightPurple
+import kotlinx.coroutines.launch
 
 @Composable
 fun Mathematics(
@@ -44,7 +42,7 @@ fun Mathematics(
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val dataStore = StoreUserDetails(context)
-    //gettting the saved data
+    val scope = rememberCoroutineScope()
     val saveUsername = dataStore.getUserName.collectAsState(initial = "")
     Box(
         modifier = Modifier
@@ -128,7 +126,14 @@ fun Mathematics(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("Mathematics",R.drawable.mathematics))
+                                        scope.launch {
+                                            dataStore.saveID("mathematics")
+                                        }
+                                        val route = Screens.MathematicsStart.getTopic(
+                                            topic = "Mathematics",
+                                            image = R.drawable.mathematics,
+                                            id = 1)
+                                        navController.navigate(route)
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -157,7 +162,15 @@ fun Mathematics(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("Programming",R.drawable.gk))
+                                        scope.launch {
+                                            dataStore.saveID("programming")
+                                        }
+                                        val route = Screens.MathematicsStart.getTopic(
+                                            topic = "programming",
+                                            image = R.drawable.gk,
+                                            id = 2)
+                                        navController.navigate(route)
+
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -183,7 +196,14 @@ fun Mathematics(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("Science",R.drawable.science))
+                                        scope.launch {
+                                            dataStore.saveID("science")
+                                        }
+                                        val route = Screens.MathematicsStart.getTopic(
+                                            topic = "Science",
+                                            image = R.drawable.programming,
+                                            id = 3)
+                                        navController.navigate(route)
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -209,7 +229,14 @@ fun Mathematics(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clickable {
-                                        navController.navigate(Screens.MathematicsStart.getTopic("General Knowledge",R.drawable.programming))
+                                        scope.launch {
+                                            dataStore.saveID("knowledge")
+                                        }
+                                        val route = Screens.MathematicsStart.getTopic(
+                                            topic = "General Knowledge",
+                                            image = R.drawable.programming,
+                                            id = 4)
+                                        navController.navigate(route)
 
                                     },
                                 contentScale = ContentScale.Crop)

@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
 
         SetUpNavigation(navController = navController)
            // Show(navController = navController, correct = 3, incorrect = 5, skipped = 5)
+           // Board()
 
 
         }
