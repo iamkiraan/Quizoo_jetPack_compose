@@ -11,44 +11,34 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quizoo.Navigations.Screens
 import com.example.quizoo.R
 import com.example.quizoo.dataStore.StoreUserDetails
 import com.example.quizoo.ui.theme.DarkPurple
-import com.example.quizoo.ui.theme.OrangeQ
-import com.example.quizoo.ui.theme.Pink40
-import com.example.quizoo.ui.theme.Pink80
-import com.example.quizoo.ui.theme.SkyBlue
-import com.example.quizoo.ui.theme.accentColor
-import com.example.quizoo.ui.theme.boxResult
 import com.example.quizoo.ui.theme.darkTeal
-import com.example.quizoo.ui.theme.grayQ
-import com.example.quizoo.ui.theme.grayQQ
 import com.example.quizoo.ui.theme.lightGray
 import com.example.quizoo.ui.theme.lightPurple
-import com.example.quizoo.ui.theme.resultColor
 import kotlinx.coroutines.launch
 
 
 @Preview
 @Composable
 fun Mathematics(
-    //navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController()
 
 ) {
 
@@ -59,6 +49,21 @@ fun Mathematics(
     val dataStore = StoreUserDetails(context)
     val scope = rememberCoroutineScope()
     val saveUsername = dataStore.getUserName.collectAsState(initial = "")
+    val correct_answers = dataStore.getCorrrect.collectAsState(initial = 0)
+    val incorrect_answers = dataStore.getIncorrrect.collectAsState(initial = 0)
+    val getId = dataStore.getId.collectAsState(initial = 0)
+    val image : Int = when(getId.value){
+        1-> R.drawable.mathematics
+        2->R.drawable.programming
+        3->R.drawable.science
+        else -> R.drawable.gk
+    }
+    val topic : String = when(getId.value){
+        1-> "Mathematics"
+        2->"Programming"
+        3->"Science"
+        else -> "General Knowledge"
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -149,7 +154,7 @@ fun Mathematics(
                                             image = R.drawable.mathematics,
                                             id = 1
                                         )
-                                        //navController.navigate(route)
+                                        navController.navigate(route)
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -186,7 +191,7 @@ fun Mathematics(
                                             image = R.drawable.gk,
                                             id = 2
                                         )
-                                        //navController.navigate(route)
+                                        navController.navigate(route)
 
 
                                     },
@@ -223,7 +228,7 @@ fun Mathematics(
                                                 image = R.drawable.programming,
                                                 id = 3
                                             )
-                                            // navController.navigate(route)
+                                            navController.navigate(route)
 
                                         },
                                     contentScale = ContentScale.Crop
@@ -260,7 +265,7 @@ fun Mathematics(
                                             image = R.drawable.programming,
                                             id = 4
                                         )
-                                        //navController.navigate(route)
+                                        navController.navigate(route)
 
                                     },
                                 contentScale = ContentScale.Crop)
@@ -284,47 +289,13 @@ fun Mathematics(
                             Text(text = "Recent Results", fontSize = 20.sp,modifier =Modifier.padding(start =20.dp,top = 20.dp), color = Color.White)
                             Column(modifier = Modifier.verticalScroll(state = verticalScrollState)) {
                                 Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
+                                    image = image,
+                                    correct = correct_answers,
+                                    incorrect = incorrect_answers,
+                                    topic = topic
                                 )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
-                                Datashow(
-                                    image = R.drawable.gk,
-                                    correct = 4,
-                                    incorrect = 5,
-                                    topic = "mathematics"
-                                )
+
+
                             }
 
                     }
@@ -342,8 +313,13 @@ fun Mathematics(
     }
 
 @Composable
-fun Datashow(image:Int,correct: Int,incorrect: Int,topic: String){
-    Card(modifier = Modifier.fillMaxWidth().padding(top=16.dp), colors = CardDefaults.cardColors(darkTeal)){
+fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: String){
+    val correctValue = correct.value?:0
+    val incorrectValue = incorrect.value?:0
+    val percentage = correctValue*10
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 16.dp), colors = CardDefaults.cardColors(darkTeal)){
         Row(){
             Image(painter = painterResource(id = R.drawable.gk), contentDescription ="",modifier =Modifier.size(60.dp))
             Column(modifier = Modifier.padding(8.dp)) {
@@ -351,13 +327,13 @@ fun Datashow(image:Int,correct: Int,incorrect: Int,topic: String){
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(.6f)
-                        .padding(top=2.dp)
+                        .padding(top = 2.dp)
                         .height(1.dp)
                         .background(Color.Black)
                 )
-                Text("Correct: $correct\t\tIncorrect: $incorrect ",color = lightGray,modifier = Modifier.padding(top=3.dp))
+                Text("Correct: $correctValue\t\tIncorrect: $incorrectValue ",color = lightGray,modifier = Modifier.padding(top=3.dp))
             }
-            val percentage = correct*10
+
             Text("$percentage %", modifier = Modifier.padding(12.dp),color = if(percentage>=40){Color.Green}else {Color.Red}, fontSize = 24.sp)
         }
 

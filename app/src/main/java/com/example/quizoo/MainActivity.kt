@@ -26,10 +26,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
 
-        //SetUpNavigation(navController = navController)
+        SetUpNavigation(navController = navController)
            // Show(navController = navController, correct = 3, incorrect = 5, skipped = 5)
            // Board()
-            Mathematics()
+
 
 
         }
