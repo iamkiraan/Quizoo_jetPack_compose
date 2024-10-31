@@ -34,7 +34,8 @@ import com.example.quizoo.ui.theme.lightGray
 import com.example.quizoo.ui.theme.lightPurple
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.Canvas
-
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.drawscope.translate
 
 
 @Preview
@@ -304,9 +305,19 @@ fun Mathematics(
                                 )
 
 
+                            }
+                            SimpleBarChart(correct = correct, incorrect =incorrect )
+
+
+
+
+
 
 
                             }
+
+                           
+
 
                     }
 
@@ -320,7 +331,7 @@ fun Mathematics(
 
     }
 
-    }
+
 
 @Composable
 fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: String){
@@ -347,7 +358,7 @@ fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: Str
 
             Text("$percentage %", modifier = Modifier.padding(12.dp),color = if(percentage>=40){Color.Green}else {Color.Red}, fontSize = 24.sp)
         }
-        SimpleBarChart(correct = correctValue, incorrect = incorrectValue)
+
 
 
 
@@ -359,58 +370,90 @@ fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: Str
 // bar chart dekhaune kaam yeta
 
 @Composable
-fun SimpleBarChart(correct: Int, incorrect: Int) {
-    val total = correct + incorrect
+fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
+    val correctValue = correct.value ?: 0
+    val incorrectValue = incorrect.value ?: 0
+    val total = correctValue + incorrectValue
 
-    // Calculate bar heights based on percentages
-    val correctHeight = if (total > 0) (correct / total.toFloat()) * 200 else 0f
-    val incorrectHeight = if (total > 0) (incorrect / total.toFloat()) * 200 else 0f
+    val correctHeightRatio = if (total > 0) (correctValue / total.toFloat()) else 0f
+    val incorrectHeightRatio = if (total > 0) (incorrectValue / total.toFloat()) else 0f
 
-    Row(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        colors = CardDefaults.cardColors(containerColor = DarkPurple)
     ) {
-        // Correct Answers Bar
         Column(
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Canvas(
+            Row(
                 modifier = Modifier
-                    .width(50.dp)
-                    .height(200.dp)
+                    .fillMaxWidth()
+                    .height(200.dp),
+                horizontalArrangement = Arrangement.SpaceAround
             ) {
-                drawRect(
-                    color = Color.Green,
-                    size = Size(width = size.width, height = correctHeight)
-                )
-            }
-            Text(text = "Correct", color = Color.White)
-        }
+                // Correct Answers Bar
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .width(40.dp)
+                            .fillMaxHeight()
+                            .padding(bottom = 8.dp), // Bottom padding
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .width(40.dp)
+                                .fillMaxHeight(correctHeightRatio)
+                        ) {
+                            drawRect(
+                                color = Color.Green,
+                                size = Size(width = size.width, height = size.height)
+                            )
+                        }
+                    }
+                    Text(
+                        text = "Correct",
+                        color = Color.White,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
 
-        // Incorrect Answers Bar
-        Column(
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
-        ) {
-            Canvas(
-                modifier = Modifier
-                    .width(50.dp)
-                    .height(200.dp)
-            ) {
-                drawRect(
-                    color = Color.Red,
-                    size = androidx.compose.ui.geometry.Size(width = size.width, height = incorrectHeight)
-                )
+                // Incorrect Answers Bar
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .width(40.dp)
+                            .fillMaxHeight()
+                            .padding(bottom = 8.dp), // Bottom padding
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .width(40.dp)
+                                .fillMaxHeight(incorrectHeightRatio)
+                        ) {
+                            drawRect(
+                                color = Color.Red,
+                                size = Size(width = size.width, height = size.height)
+                            )
+                        }
+                    }
+                    Text(
+                        text = "Incorrect",
+                        color = Color.White,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
             }
-            Text(text = "Incorrect", color = Color.White)
         }
     }
 }
-
-
-
-
-
-
-

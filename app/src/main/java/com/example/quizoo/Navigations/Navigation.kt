@@ -14,7 +14,7 @@ import com.example.quizoo.MathematicsScreens.Show
 import com.example.quizoo.MathematicsScreens.StartScreen
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
-import kotlinx.serialization.Serializable
+
 
 
 
