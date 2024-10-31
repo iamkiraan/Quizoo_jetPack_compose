@@ -19,6 +19,7 @@ package com.example.quizoo.Navigations
          }
      }
      object ResultMathematics : Screens(route = "ResultMathematics/{correct}/{incorrect}/{skipped}")
+     object RoomPage : Screens(route = "RoomPage")
 
 
 

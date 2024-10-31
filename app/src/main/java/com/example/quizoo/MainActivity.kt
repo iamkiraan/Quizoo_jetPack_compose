@@ -12,6 +12,7 @@ import com.example.quizoo.MathematicsScreens.Board
 import com.example.quizoo.MathematicsScreens.BoardTrue
 import com.example.quizoo.MathematicsScreens.Show
 import com.example.quizoo.MathematicsScreens.StartScreen
+import com.example.quizoo.Multiplayer.LandingPage
 import com.example.quizoo.Navigations.SetUpNavigation
 import com.example.quizoo.Screens.SignUpScreen
 
@@ -29,6 +30,7 @@ class MainActivity : ComponentActivity() {
         SetUpNavigation(navController = navController)
            // Show(navController = navController, correct = 3, incorrect = 5, skipped = 5)
            // Board()
+           // LandingPage()
 
 
 

@@ -109,7 +109,7 @@ fun Mathematics(
                                 modifier = Modifier.padding(18.dp),
                                 fontSize = 24.sp,
                                 color = Color.White)
-                            Button(onClick = {},
+                            Button(onClick = {navController.navigate(Screens.RoomPage.route)},
                                 modifier = Modifier
                                     .padding(top = 1.dp, start = 16.dp)
                                     .fillMaxWidth(.4f),
@@ -341,7 +341,7 @@ fun Datashow(image:Int, correct: State<Int?>, incorrect: State<Int?>, topic: Str
     val percentage = correctValue*10
     Card(modifier = Modifier
         .fillMaxWidth()
-        .padding(top = 16.dp), colors = CardDefaults.cardColors(darkTeal)){
+        .padding(top = 16.dp,start = 15.dp,end=15.dp), colors = CardDefaults.cardColors(darkTeal)){
         Row(){
             Image(painter = painterResource(id = image), contentDescription ="",modifier =Modifier.size(60.dp))
             Column(modifier = Modifier.padding(8.dp)) {
@@ -381,19 +381,19 @@ fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .height(300.dp)
             .padding(16.dp),
         colors = CardDefaults.cardColors(containerColor = DarkPurple)
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(160.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 // Correct Answers Bar
@@ -402,9 +402,9 @@ fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
                 ) {
                     Box(
                         modifier = Modifier
-                            .width(40.dp)
+                            .width(20.dp)
                             .fillMaxHeight()
-                            .padding(bottom = 8.dp), // Bottom padding
+                            .padding(bottom = 10.dp),
                         contentAlignment = Alignment.BottomCenter
                     ) {
                         Canvas(
@@ -418,11 +418,7 @@ fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
                             )
                         }
                     }
-                    Text(
-                        text = "Correct",
-                        color = Color.White,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
+
                 }
 
                 // Incorrect Answers Bar
@@ -431,14 +427,14 @@ fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
                 ) {
                     Box(
                         modifier = Modifier
-                            .width(40.dp)
+                            .width(20.dp)
                             .fillMaxHeight()
-                            .padding(bottom = 8.dp), // Bottom padding
+                            .padding(bottom = 10.dp), // Bottom padding
                         contentAlignment = Alignment.BottomCenter
                     ) {
                         Canvas(
                             modifier = Modifier
-                                .width(40.dp)
+                                .width(20.dp)
                                 .fillMaxHeight(incorrectHeightRatio)
                         ) {
                             drawRect(
@@ -447,12 +443,22 @@ fun SimpleBarChart(correct: State<Int?>, incorrect: State<Int?>) {
                             )
                         }
                     }
-                    Text(
-                        text = "Incorrect",
-                        color = Color.White,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
+
                 }
+
+            }
+            Row( modifier = Modifier
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround) {
+                Text(
+                    text = "correct",
+                    color = Color.White
+
+                )
+                Text(
+                    text = "incorrect",
+                    color = Color.White
+                )
             }
         }
     }

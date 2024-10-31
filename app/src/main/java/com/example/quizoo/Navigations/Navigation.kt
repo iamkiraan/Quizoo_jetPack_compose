@@ -12,6 +12,7 @@ import com.example.quizoo.MathematicsScreens.Board
 import com.example.quizoo.MathematicsScreens.BoardTrue
 import com.example.quizoo.MathematicsScreens.Show
 import com.example.quizoo.MathematicsScreens.StartScreen
+import com.example.quizoo.Multiplayer.LandingPage
 import com.example.quizoo.Screens.Login
 import com.example.quizoo.Screens.SignUpScreen
 
@@ -98,7 +99,11 @@ fun SetUpNavigation(
 
 
 
-
+       composable(
+           route = Screens.RoomPage.route
+       ){
+           LandingPage(navController)
+       }
 
 
 
