@@ -121,6 +121,16 @@ dependencies {
 
 
 
+    implementation(libs.websocket.okhttp)
+
+
+
+    // JSON parsing
+    implementation(libs.gson)
+
+
+
+
 
 
 
